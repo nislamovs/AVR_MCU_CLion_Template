@@ -6,4 +6,4 @@
 
 .cmake-build-debug
 
-**/bin/*
+avr-mcu-clion-template*
