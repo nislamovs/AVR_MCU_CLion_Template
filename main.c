@@ -7,7 +7,7 @@
 #define LED_PIN2 1
 #define LED_DDR DDRD
 
-#define F_CPU 16000000UL
+#define F_CPU 8000000UL
 
 #define BAUDRATE 9600
 #define BAUD_PRESCALLER (((F_CPU / (BAUDRATE * 16UL))) - 1)
@@ -18,18 +18,8 @@ unsigned char USART_receive(void);
 void USART_send( unsigned char data);
 void USART_putstring(char* StringPtr);
 
-char String[]="Hello world!!";    //String[] is in fact an array but when we put the text between the " " symbols the compiler threats it as a String and automatically puts the null termination character in the end of the text
+char String[]="Hello world!!\r\n";
 
-//int main(void){
-//    USART_init();        //Call the USART initialization code
-//
-//    while(1){        //Infinite loop
-//        USART_putstring(String);    //Pass the string to the USART_putstring function and sends it over the serial
-//        _delay_ms(1000);        //Delay for 5 seconds so it will re-send the string every 5 seconds
-//    }
-//
-//    return 0;
-//}
 
 void USART_init(void){
 
@@ -56,20 +46,31 @@ void USART_send( unsigned char data){
 void USART_putstring(char* StringPtr){
 
     while(*StringPtr != 0x00){
-        USART_send(*StringPtr);
-        StringPtr++;}
-
-}
-
-int main(void)
-{
-    PIN_AS_OUTPUT(LED_DDR, LED_PIN1);
-    PIN_AS_OUTPUT(LED_DDR, LED_PIN2);
-
-    while (1) {
-        PIN_ON(LED_PORT, LED_PIN1);
-        _delay_ms(1300);
-        PIN_OFF(LED_PORT, LED_PIN1);
-        _delay_ms(1300);
+        USART_send(*StringPtr++);
     }
 }
+
+
+int main(void){
+    USART_init();        //Call the USART initialization code
+
+    while(1){        //Infinite loop
+        USART_putstring(String);    //Pass the string to the USART_putstring function and sends it over the serial
+        _delay_ms(1000);        //Delay for 5 seconds so it will re-send the string every 5 seconds
+    }
+
+    return 0;
+}
+
+//int main(void)
+//{
+//    PIN_AS_OUTPUT(LED_DDR, LED_PIN1);
+//    PIN_AS_OUTPUT(LED_DDR, LED_PIN2);
+//
+//    while (1) {
+//        PIN_ON(LED_PORT, LED_PIN1);
+//        _delay_ms(100);
+//        PIN_OFF(LED_PORT, LED_PIN1);
+//        _delay_ms(100);
+//    }
+//}
