@@ -1,4 +1,4 @@
-### CMake project for CLion
+# CMake project for CLion
 
 **Importing**
  
