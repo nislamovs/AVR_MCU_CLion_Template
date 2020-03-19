@@ -12,7 +12,13 @@ CMake project for CLion
 
 **Project rename:** 
 
-- Change _PROJECT(avr-mcu-clion-template)_ to _PROJECT(your-project-name-here)_ in CMakeLists.txt file.
+- Change ```_PROJECT(avr-mcu-clion-template)_``` to ```_PROJECT(your-project-name-here)_``` in _CMakeLists.txt_ file.
 
 - Change hex filename in upload.sh script in scripts folder.
 
+**Building:**
+
+- Go to project root folder
+
+- Run command from console: ```cmake .```
+- Then run command from console: ```make```
